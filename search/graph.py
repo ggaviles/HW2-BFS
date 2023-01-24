@@ -14,7 +14,7 @@ class Graph:
         """
         self.graph = nx.read_adjlist(filename, create_using=nx.DiGraph, delimiter=";")
 
-    def bfs(self, start, end):
+    def bfs(self, start, end=None):
         """
         TODO: write a method that performs a breadth first traversal and pathfinding on graph G
 
@@ -26,11 +26,12 @@ class Graph:
 
         # filename = input("Enter path to adjlist file: ")
 
-        graph = self.graph # write terminal prompt for path to file
+        graph = self.graph  # write terminal prompt for path to file
         q = queue.Queue()
         visited = []
         q.put(start)
         visited.append(start)
+
         while q:
             v = q.get()
             n = [n for n in nx.neighbors(graph, v)]
@@ -38,6 +39,8 @@ class Graph:
                 if w not in visited:
                     visited.append(w)
                     q.put(w)
+            q.task_done()
+
         print(q)
 
 
