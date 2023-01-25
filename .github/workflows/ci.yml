@@ -26,6 +26,9 @@ jobs:
       - name: Install numpy
         run: |
           pip install numpy
+      - name: Install networkx
+        run: |
+          pip install networkx
       - name: Test with pytest
         run: |
           python -m pytest -vv tests/*py
