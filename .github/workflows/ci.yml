@@ -13,11 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          ref: main
+          repository: ggaviles/HW2-BFS
 
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
