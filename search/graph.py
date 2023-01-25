@@ -1,4 +1,5 @@
 import os
+import random
 import queue
 import networkx as nx
 
@@ -13,6 +14,12 @@ class Graph:
         Initialization of graph object 
         """
         self.graph = nx.read_adjlist(filename, create_using=nx.DiGraph, delimiter=";")
+
+    def nodes(self):
+        return nx.nodes(self.graph)
+
+    def neighbors(self, node):
+        return nx.neighbors(self.graph, node)
 
     def bfs(self, start, end=None):
         """
