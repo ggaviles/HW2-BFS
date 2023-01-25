@@ -38,13 +38,14 @@ class Graph:
             visited.append(start)
 
             while q:
-
+                # break out of while loop once you have emptied the queue
                 if q.empty():
-                    break
+                    return visited
                 else:
                     # pop off first element of queue
                     v = q.get()
-                    print(str(v) + " ", end="")
+                    #print(str(v) + " ", end="")
+                    #print(visited)
 
                     # return list of neighbors of popped off element
                     neighbor_list = [n for n in nx.neighbors(graph, v)]
@@ -58,7 +59,8 @@ class Graph:
                             # add neighbor to queue
                             q.put(neighbors)
                     q.task_done()
-        return
+        #else:
+            #return None
 
 
         """
