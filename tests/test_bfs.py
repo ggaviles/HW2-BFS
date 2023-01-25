@@ -4,7 +4,6 @@ import pytest
 import networkx as nx
 from search import Graph
 
-@pytest.fixture
 def test_bfs_traversal():
     """
     TODO: Write your unit tests for a breadth-first
@@ -69,9 +68,8 @@ def test_bfs():
         graph_bfs_list = graph.bfs(random_start_node, random_end_node)
 
         # Call built-in shortest_path method on nx.DiGraph object and store list of traversed nodes
-        comparison_node_list = list(nx.shortest_path(graph_comparison, source=random_start_node, target=random_end_node, weight=None))
+        comparison_node_list = list(
+            nx.shortest_path(graph_comparison, source=random_start_node, target=random_end_node, weight=None))
 
         # Compare lists of traversed nodes using bfs method you wrote vs shortest_path method built into nx.DiGraph object
         assert comparison_node_list == graph_bfs_list
-
-
