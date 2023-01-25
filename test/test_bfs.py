@@ -1,6 +1,5 @@
 # write tests for bfs
 import random
-
 import pytest
 import networkx as nx
 from search import Graph
@@ -51,6 +50,9 @@ def test_bfs():
     # Read '../data/tiny_network.adjlist' in as Graph object
     graph = Graph('../data/citation_network.adjlist')
 
+    # Read '../data/tiny_network.adjlist' in as nx.DiGraph object
+    graph_comparison = nx.read_adjlist("../data/citation_network.adjlist", create_using=nx.DiGraph, delimiter=";")
+
     # Create list of nodes in Graph object
     node_list = list(graph.nodes())
 
@@ -60,20 +62,16 @@ def test_bfs():
     # Select random end node from the list of nodes
     random_end_node = random.choice(node_list)
 
-    if
+    if nx.has_path(graph_comparison, source=random_start_node, target=random_end_node) is False:
+        pass
+    else:
         # Call your own bfs method on Graph object and store list of traversed nodes
         graph_bfs_list = graph.bfs(random_start_node, random_end_node)
-
-        # Read '../data/tiny_network.adjlist' in as nx.DiGraph object
-        graph_comparison = nx.read_adjlist("../data/citation_network.adjlist", create_using=nx.DiGraph, delimiter=";")
 
         # Call built-in shortest_path method on nx.DiGraph object and store list of traversed nodes
         comparison_node_list = list(nx.shortest_path(graph_comparison, source=random_start_node, target=random_end_node, weight=None))
 
         # Compare lists of traversed nodes using bfs method you wrote vs shortest_path method built into nx.DiGraph object
         assert comparison_node_list == graph_bfs_list
-    except nx.NetworkXNoPath:
-        return None
 
 
-    pass
