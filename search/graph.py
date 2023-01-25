@@ -14,7 +14,7 @@ class Graph:
         """
         self.graph = nx.read_adjlist(filename, create_using=nx.DiGraph, delimiter=";")
 
-    def bfs(self, start, end_node=None):
+    def bfs(self, start, end=None):
         """
         TODO: write a method that performs a breadth first traversal and pathfinding on graph G
 
@@ -26,13 +26,13 @@ class Graph:
 
         # filename = input("Enter path to adjlist file: ")
 
-        graph = self.graph  # write terminal prompt for path to file
+        graph = self.graph
 
         # Initialize queue and list
         q = queue.Queue()
         visited = []
 
-        if end_node==None:
+        if end is None:
             # Add start node to queue and visited list
             q.put(start)
             visited.append(start)
@@ -44,8 +44,6 @@ class Graph:
                 else:
                     # pop off first element of queue
                     v = q.get()
-                    #print(str(v) + " ", end="")
-                    #print(visited)
 
                     # return list of neighbors of popped off element
                     neighbor_list = [n for n in nx.neighbors(graph, v)]
@@ -59,31 +57,37 @@ class Graph:
                             # add neighbor to queue
                             q.put(neighbors)
                     q.task_done()
-        #else:
-            #return None
 
+        elif end is not None and nx.has_path(graph, start, end):
 
-        """
-        add source node to queue
-        add source neighbors to queue
-        go to first node in queue
-        add its neighbors
-        go to next node in queue
-        add its neighbors to queue
-        check if in queue already, don't add
-        
-        """
+            path_list = [[start]]
+            index = 0
 
-        """
-        if end is None:
-            return *list of nodes with order of BFS traversal*
+            # to keep track of previously visited nodes
+            prev_nodes = {start}
+
+            if start == end:
+                return path_list[0]
+
+            while index < len(path_list):
+                curr_path = path_list[index]
+                last_node = curr_path[-1]
+                next_node_list = graph[last_node]
+
+                if end in next_node_list:
+                    curr_path.append(end)
+                    return curr_path
+
+                for next_node in next_node_list:
+                    if next_node not in prev_nodes:
+                        updated_path = curr_path[:]
+                        updated_path.append(next_node)
+                        path_list.append(updated_path)
+
+                        prev_nodes.add(next_node)
+                index += 1
+            return []
         else:
-            if path exists:
-                return *list of nodes with order of shortest path*
-            else:
-                return None
-
-        return
-        """
+            return None
 
 
