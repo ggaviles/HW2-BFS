@@ -1,8 +1,11 @@
 # write tests for bfs
 import random
 import pytest
+import pathlib
 import networkx as nx
 from search import Graph
+
+data_dir = pathlib.Path(__file__).resolve().parent.parent / "data"
 
 def test_bfs_traversal():
     """
@@ -14,7 +17,7 @@ def test_bfs_traversal():
     """
 
     # Read '../data/tiny_network.adjlist' in as Graph object
-    graph = Graph('../data/tiny_network.adjlist')
+    graph = Graph(data_dir / 'tiny_network.adjlist')
 
     # Create list of nodes in Graph object
     node_list = list(graph.nodes())
@@ -26,7 +29,7 @@ def test_bfs_traversal():
     graph_bfs_list = graph.bfs(random_node)
 
     # Read '../data/tiny_network.adjlist' in as nx.DiGraph object
-    graph_comparison = nx.read_adjlist("../data/tiny_network.adjlist", create_using=nx.DiGraph, delimiter=";")
+    graph_comparison = nx.read_adjlist(data_dir / 'tiny_network.adjlist', create_using=nx.DiGraph, delimiter=";")
 
     # Call built-in bfs_tree method on nx.DiGraph object and store list of traversed nodes
     comparison_node_list = list(nx.bfs_tree(graph_comparison, source=random_node).nodes())
@@ -46,11 +49,11 @@ def test_bfs():
     Include an additional tests for nodes that are not connected
     which should return None. 
     """
-    # Read '../data/tiny_network.adjlist' in as Graph object
-    graph = Graph('../data/citation_network.adjlist')
+    # Read '../data/citation_network.adjlist' in as Graph object
+    graph = Graph(data_dir / 'citation_network.adjlist')
 
-    # Read '../data/tiny_network.adjlist' in as nx.DiGraph object
-    graph_comparison = nx.read_adjlist("../data/citation_network.adjlist", create_using=nx.DiGraph, delimiter=";")
+    # Read '../data/citation_network.adjlist' in as nx.DiGraph object
+    graph_comparison = nx.read_adjlist(data_dir / 'citation_network.adjlist', create_using=nx.DiGraph, delimiter=";")
 
     # Create list of nodes in Graph object
     node_list = list(graph.nodes())
