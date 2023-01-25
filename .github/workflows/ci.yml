@@ -29,6 +29,9 @@ jobs:
       - name: Install networkx
         run: |
           pip install networkx
+      - name: Install matplotlib
+        run: |
+          pip install matplotlib
       - name: Test with pytest
         run: |
           python -m pytest -vv tests/*py

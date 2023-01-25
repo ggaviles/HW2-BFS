@@ -10,7 +10,7 @@ def test_bfs_traversal():
     TODO: Write your unit tests for a breadth-first
     traversal here. Create an instance of your Graph class 
     using the 'tiny_network.adjlist' file and assert 
-    that all nodes are being traversed (ie. returns 
+    that all nodes are being traversed (i.e. returns
     the right number of nodes, in the right order, etc.)
     """
 
