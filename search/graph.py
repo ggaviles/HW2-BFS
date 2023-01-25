@@ -39,21 +39,26 @@ class Graph:
 
             while q:
 
-                # pop off first element of queue
-                v = q.get()
-                print(str(v) + " ", end="")
+                if q.empty():
+                    break
+                else:
+                    # pop off first element of queue
+                    v = q.get()
+                    print(str(v) + " ", end="")
 
-                # return list of neighbors of popped off element
-                neighbor_list = [n for n in nx.neighbors(graph, v)]
+                    # return list of neighbors of popped off element
+                    neighbor_list = [n for n in nx.neighbors(graph, v)]
 
-                # iterate through neighbors list
-                for neighbors in neighbor_list:
-                    # if neighbor is not in visited list
-                    if neighbors not in visited:
-                        # add neighbor to visited list
-                        visited.append(neighbors)
-                        # add neighbor to queue
-                        q.put(neighbors)
+                    # iterate through neighbors list
+                    for neighbors in neighbor_list:
+                        # if neighbor is not in visited list
+                        if neighbors not in visited:
+                            # add neighbor to visited list
+                            visited.append(neighbors)
+                            # add neighbor to queue
+                            q.put(neighbors)
+                    q.task_done()
+        return
 
 
         """
